@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yun.dao.SingerMapper">
+  <resultMap id="BaseResultMap" type="com.yun.entity.Singer">
+    <id column="sid" jdbcType="INTEGER" property="sid" />
+    <result column="sname" jdbcType="VARCHAR" property="sname" />
+    <result column="gender" jdbcType="BIT" property="gender" />
+    <result column="area" jdbcType="VARCHAR" property="area" />
+    <result column="headImg" jdbcType="VARCHAR" property="headimg" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    sid, sname, gender, area, headImg
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_singer
+    where sid = #{sid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_singer
+    where sid = #{sid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.yun.entity.Singer">
+    insert into t_singer (sid, sname, gender, 
+      area, headImg)
+    values (#{sid,jdbcType=INTEGER}, #{sname,jdbcType=VARCHAR}, #{gender,jdbcType=BIT}, 
+      #{area,jdbcType=VARCHAR}, #{headimg,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yun.entity.Singer">
+    insert into t_singer
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="sid != null">
+        sid,
+      </if>
+      <if test="sname != null">
+        sname,
+      </if>
+      <if test="gender != null">
+        gender,
+      </if>
+      <if test="area != null">
+        area,
+      </if>
+      <if test="headimg != null">
+        headImg,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="sid != null">
+        #{sid,jdbcType=INTEGER},
+      </if>
+      <if test="sname != null">
+        #{sname,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null">
+        #{gender,jdbcType=BIT},
+      </if>
+      <if test="area != null">
+        #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="headimg != null">
+        #{headimg,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yun.entity.Singer">
+    update t_singer
+    <set>
+      <if test="sname != null">
+        sname = #{sname,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null">
+        gender = #{gender,jdbcType=BIT},
+      </if>
+      <if test="area != null">
+        area = #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="headimg != null">
+        headImg = #{headimg,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where sid = #{sid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yun.entity.Singer">
+    update t_singer
+    set sname = #{sname,jdbcType=VARCHAR},
+      gender = #{gender,jdbcType=BIT},
+      area = #{area,jdbcType=VARCHAR},
+      headImg = #{headimg,jdbcType=VARCHAR}
+    where sid = #{sid,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectBySize" resultType="com.yun.entity.Singer">
+    select sname, sid from t_singer order by RAND() limit #{size}
+  </select>
+</mapper>

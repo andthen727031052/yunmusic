@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yun.dao.MusicMapper">
+  <resultMap id="BaseResultMap" type="com.yun.entity.Music">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <!--<result column="lyric" jdbcType="TEXT" property="lyric" />-->
+    <result column="clicknumber" jdbcType="INTEGER" property="clicknumber" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="imgurl" jdbcType="VARCHAR" property="imgurl" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, name, lyric, clicknumber, url, imgurl
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_music
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_music
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.yun.entity.Music">
+    insert into t_music (id, name, lyric, 
+      clicknumber, url, imgurl
+      )
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{lyric},
+      #{clicknumber,jdbcType=INTEGER}, #{url,jdbcType=VARCHAR}, #{imgurl,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.yun.entity.Music">
+    insert into t_music
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="lyric != null">
+        lyric,
+      </if>
+      <if test="clicknumber != null">
+        clicknumber,
+      </if>
+      <if test="url != null">
+        url,
+      </if>
+      <if test="imgurl != null">
+        imgurl,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="lyric != null">
+        #{lyric},
+      </if>
+      <if test="clicknumber != null">
+        #{clicknumber,jdbcType=INTEGER},
+      </if>
+      <if test="url != null">
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="imgurl != null">
+        #{imgurl,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yun.entity.Music">
+    update t_music
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="lyric != null">
+        lyric = #{lyric},
+      </if>
+      <if test="clicknumber != null">
+        clicknumber = #{clicknumber,jdbcType=INTEGER},
+      </if>
+      <if test="url != null">
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="imgurl != null">
+        imgurl = #{imgurl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yun.entity.Music">
+    update t_music
+    set name = #{name,jdbcType=VARCHAR},
+      lyric = #{lyric},
+      clicknumber = #{clicknumber,jdbcType=INTEGER},
+      url = #{url,jdbcType=VARCHAR},
+      imgurl = #{imgurl,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectById" resultType="com.yun.vo.MusicVo">
+    SELECT m.*,s.sname,st.name AS sheetName, l.lname from t_music m
+    INNER JOIN t_singer_music sm
+    on sm.mid = m.id
+    INNER JOIN t_singer s
+    on s.sid = sm.sid
+    INNER JOIN t_sheet_music stm
+    on stm.mid = m.id
+    INNER JOIN t_sheet st
+    on st.stid = stm.stid
+    INNER JOIN t_label_music lm
+    on lm.mid = m.id
+    INNER JOIN t_label l
+    on l.lid = lm.lid
+    WHERE m.id = #{id}
+  </select>
+
+  <select id="selectBySize" resultType="com.yun.vo.IndexMusicVo">
+    select mu.id, mu.name, mu.imgurl,sg.sname FROM t_music mu
+    inner join t_singer_music sm
+    on mu.id=sm.mid
+    inner join t_singer sg
+    on sg.sid=sm.sid
+    ORDER BY RAND() LIMIT #{size}
+  </select>
+
+  <select id="selectNewMusic" resultType="com.yun.entity.Music">
+    select id, name from t_music order by id desc limit #{size}
+  </select>
+
+  <select id="selectHotMusic" resultType="com.yun.entity.Music">
+    select id, name from t_music order by clicknumber desc limit #{size}
+  </select>
+
+    <select id="selectBySheetId" resultType="com.yun.vo.MusicVo">
+    SELECT m.*,s.sname from t_music m
+    INNER JOIN t_singer_music sm
+    on sm.mid = m.id
+    INNER JOIN t_singer s
+    on s.sid = sm.sid
+    INNER JOIN t_sheet_music stm
+	on stm.mid = m.id
+    WHERE stm.stid = #{id}
+    </select>
+</mapper>
