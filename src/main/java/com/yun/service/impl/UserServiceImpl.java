@@ -64,6 +64,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public JsonBean findUserInfoByUid(Integer uid) {
-        return null;
+        return JsonUtils.createJsonBean(1,userDao.selectByPrimaryKey(uid));
     }
 }

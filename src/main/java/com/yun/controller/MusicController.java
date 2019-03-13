@@ -40,9 +40,8 @@ public class MusicController {
         return musicService.findHotMusicBySize(size);
     }
 
-    // 原创榜单接口
-    @RequestMapping("/findoriginal.do")
-    public JsonBean findHotAscMusicBySize(int size){
-        return musicService.findHotAscMusic(size);
+    @RequestMapping("findmusicbyuid.do")
+    public JsonBean findMusicByUid(int uid){
+        return musicService.findByUser(uid);
     }
 }

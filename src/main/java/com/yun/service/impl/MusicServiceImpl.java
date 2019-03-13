@@ -39,7 +39,7 @@ public class MusicServiceImpl implements MusicService {
     }
 
     @Override
-    public JsonBean findHotAscMusic(int size) {
-        return JsonUtils.createJsonBean(1, musicDao.selectHotAscMusic(size));
+    public JsonBean findByUser(int uid) {
+        return JsonUtils.createJsonBean(1,musicDao.selectBYUid(uid));
     }
 }

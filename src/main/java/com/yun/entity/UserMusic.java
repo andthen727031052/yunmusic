@@ -1,11 +1,11 @@
 package com.yun.entity;
 
-public class UserSheet {
+public class UserMusic {
     private Integer id;
 
     private Integer uid;
 
-    private Integer stid;
+    private Integer mid;
 
     public Integer getId() {
         return id;
@@ -23,11 +23,11 @@ public class UserSheet {
         this.uid = uid;
     }
 
-    public Integer getStid() {
-        return stid;
+    public Integer getMid() {
+        return mid;
     }
 
-    public void setStid(Integer stid) {
-        this.stid = stid;
+    public void setMid(Integer mid) {
+        this.mid = mid;
     }
 }

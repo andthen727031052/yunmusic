@@ -20,4 +20,6 @@ public interface UserService {
 
     // 根据ID查询用户数据
     JsonBean findUserInfoByUid(Integer uid);
+
+
 }

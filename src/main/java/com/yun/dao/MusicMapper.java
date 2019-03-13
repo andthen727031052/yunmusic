@@ -31,7 +31,6 @@ public interface MusicMapper {
 
     // 根据播放量降序查询(查询飙升榜)
     List<Music> selectHotMusic(int size);
-
-    // 根据播放量降序查询(查询飙升榜)
-    List<Music> selectHotAscMusic(int size);
+    //根据用户id查询收藏的所有歌曲
+    List<MusicVo> selectBYUid(int uid);
 }

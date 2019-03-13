@@ -3,6 +3,7 @@ package com.yun.controller;
 import com.yun.common.JsonBean;
 import com.yun.entity.User;
 import com.yun.service.UserService;
+import com.yun.util.JsonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -40,7 +41,7 @@ public class UserController {
         return userService.addUser(user);
     }
 
-    @RequestMapping(value = "/addImg.do", method = {RequestMethod.POST})
+    @RequestMapping(value = "addImg.do", method = {RequestMethod.POST})
     public Object headImg(@RequestParam(value = "file",required =false) MultipartFile file, HttpServletRequest request, HttpServletResponse response) throws Exception {
         JsonBean bean = null;
         //String prefix="";
@@ -101,6 +102,19 @@ public class UserController {
     public JsonBean updateUser(User user){
         return userService.updateUser(user);
     }
+
+    @RequestMapping("getuser.do")
+    public JsonBean findUser(HttpSession session){
+        JsonBean bean = new JsonBean();
+        Integer id = (Integer) session.getAttribute("user");
+        if (id==null){
+           bean =  JsonUtils.createJsonBean(0,"未登录");
+        }else {
+            bean = userService.findUserInfoByUid(id);
+        }
+        return bean;
+    }
+
 
 
 
