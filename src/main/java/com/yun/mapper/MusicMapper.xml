@@ -130,12 +130,30 @@
     ORDER BY RAND() LIMIT #{size}
   </select>
 
-  <select id="selectNewMusic" resultType="com.yun.entity.Music">
-    select id, name from t_music order by id desc limit #{size}
+  <select id="selectNewMusic" resultType="com.yun.vo.MusicVo">
+    SELECT m.*,s.sname from t_music m
+    INNER JOIN t_singer_music sm
+    on sm.mid = m.id
+    INNER JOIN t_singer s
+    on s.sid = sm.sid
+    INNER JOIN t_sheet_music stm
+    on stm.mid = m.id
+    INNER JOIN t_sheet st
+    on st.stid = stm.stid
+    order by m.id desc limit #{size}
   </select>
 
-  <select id="selectHotMusic" resultType="com.yun.entity.Music">
-    select id, name from t_music order by clicknumber desc limit #{size}
+  <select id="selectHotMusic" resultType="com.yun.vo.MusicVo">
+    SELECT m.*,s.sname from t_music m
+    INNER JOIN t_singer_music sm
+    on sm.mid = m.id
+    INNER JOIN t_singer s
+    on s.sid = sm.sid
+    INNER JOIN t_sheet_music stm
+    on stm.mid = m.id
+    INNER JOIN t_sheet st
+    on st.stid = stm.stid
+    order by m.clicknumber desc limit #{size}
   </select>
 
     <select id="selectBySheetId" resultType="com.yun.vo.MusicVo">
@@ -147,5 +165,18 @@
     INNER JOIN t_sheet_music stm
 	on stm.mid = m.id
     WHERE stm.stid = #{id}
+    </select>
+
+    <select id="selectHotAscMusic" resultType="com.yun.vo.MusicVo">
+    SELECT m.*,s.sname from t_music m
+    INNER JOIN t_singer_music sm
+    on sm.mid = m.id
+    INNER JOIN t_singer s
+    on s.sid = sm.sid
+    INNER JOIN t_sheet_music stm
+    on stm.mid = m.id
+    INNER JOIN t_sheet st
+    on st.stid = stm.stid
+    order by m.clicknumber asc limit #{size}
     </select>
 </mapper>
