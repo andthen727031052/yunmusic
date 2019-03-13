@@ -9,7 +9,7 @@ public interface UserMapper {
 
     int insertSelective(User record);
 
-    User selectByPrimaryKey(Integer uid);
+    User selectById(Integer uid);
 
     int updateByPrimaryKeySelective(User record);
 
@@ -17,4 +17,7 @@ public interface UserMapper {
 
     // 根据用户名查询用户
     User selectByName(String name);
+
+    // 根据用户ID查询用户数据
+    User selectByUid(Integer uid);
 }
