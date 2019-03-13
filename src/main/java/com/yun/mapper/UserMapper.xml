@@ -115,4 +115,8 @@
   <select id="selectByName" resultType="com.yun.entity.User">
     select * from t_user where uname=#{name}
   </select>
+  
+  <select id="selectByUid" resultType="com.yun.entity.User">
+    select * from
+  </select>
 </mapper>
