@@ -17,6 +17,11 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import javax.servlet.http.HttpSession;
 
 @RestController
 @CrossOrigin
@@ -26,8 +31,8 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("login.do")
-    public JsonBean login(String uname, String password){
-        return userService.login(uname, password);
+    public JsonBean login(String uname, String password, HttpSession session){
+        return userService.login(uname, password, session);
     }
 
     @PostMapping("adduser.do")
@@ -96,6 +101,8 @@ public class UserController {
     public JsonBean updateUser(User user){
         return userService.updateUser(user);
     }
+
+
 
 
 }

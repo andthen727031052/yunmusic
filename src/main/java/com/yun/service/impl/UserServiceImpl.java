@@ -8,6 +8,8 @@ import com.yun.util.JsonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpSession;
+
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -15,12 +17,13 @@ public class UserServiceImpl implements UserService {
     private UserMapper userDao;
 
     @Override
-    public JsonBean login(String name, String password) {
+    public JsonBean login(String name, String password, HttpSession session) {
         if ((name != null) && (!name.equals("")) && (password != null) && (!password.equals(""))){
             User user = userDao.selectByName(name);
             if (user != null){
                 String passwordT = user.getPassword();
                 if (passwordT.equals(password)){
+                    session.setAttribute("user", user.getUid());
                     return JsonUtils.createJsonBean(1, "登录成功");
                 }else {
                     return JsonUtils.createJsonBean(0, "用户名或密码错误");
@@ -57,5 +60,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public JsonBean updateUser(User user) {
         return JsonUtils.createJsonBean(userDao.updateByPrimaryKeySelective(user)>0?1:0,null);
+    }
+
+    @Override
+    public JsonBean findUserInfoByUid(Integer uid) {
+        return null;
     }
 }
