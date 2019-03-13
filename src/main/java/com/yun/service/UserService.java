@@ -10,4 +10,9 @@ public interface UserService {
 
     // 注册
     JsonBean addUser(User user);
+    //修改用户信息
+    JsonBean updateUser(User user);
+
+    
+
 }

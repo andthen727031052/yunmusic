@@ -23,9 +23,9 @@
 	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
 		  init-method="init" destroy-method="close">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://39.104.79.34:3306/music" />
+		<property name="url" value="jdbc:mysql://39.96.216.56:3306/music" />
 		<property name="username" value="root" />
-		<property name="password" value="123" />
+		<property name="password" value="doudoujun" />
 		<!-- 配置初始化大小、最小、最大	 -->
 		<property name="initialSize" value="1" />
 		<property name="minIdle" value="1" />

@@ -53,4 +53,9 @@ public class UserServiceImpl implements UserService {
         }
         return JsonUtils.createJsonBean(0, "用户名和密码不能为空");
     }
+
+    @Override
+    public JsonBean updateUser(User user) {
+        return JsonUtils.createJsonBean(userDao.updateByPrimaryKeySelective(user)>0?1:0,null);
+    }
 }
