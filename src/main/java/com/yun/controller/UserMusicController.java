@@ -14,6 +14,7 @@ public class UserMusicController {
 
     @RequestMapping("collect.do")
     public JsonBean collectMusic(UserMusic userMusic){
+
         return userMusicService.addUserMusic(userMusic);
     }
 

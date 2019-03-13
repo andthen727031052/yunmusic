@@ -14,6 +14,14 @@ public class UserMusicServiceImpl implements UserMusicService {
     private UserMusicMapper userMusicDao;
     @Override
     public JsonBean addUserMusic(UserMusic userMusic) {
-        return JsonUtils.createJsonBean(userMusicDao.insertSelective(userMusic)>0?1:0,null);
+        UserMusic userMusic1 = userMusicDao.selectByInfo(userMusic.getUid(), userMusic.getMid());
+        if (userMusic1==null){
+            return JsonUtils.createJsonBean(userMusicDao.insertSelective(userMusic)>0?1:0,null);
+        }else {
+            return JsonUtils.createJsonBean(0,"已经收藏过这首歌");
+        }
+
     }
+
+
 }

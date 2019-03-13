@@ -5,4 +5,5 @@ import com.yun.entity.UserMusic;
 
 public interface UserMusicService {
     JsonBean addUserMusic(UserMusic userMusic);
+
 }

@@ -66,4 +66,8 @@
       mid = #{mid,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="selectByInfo" resultMap="BaseResultMap">
+    select * from t_user_music
+    where uid=#{uid} and mid=#{mid}
+  </select>
 </mapper>
