@@ -19,4 +19,6 @@ public interface SingerMapper {
 
     // 根据数量随机查询歌手
     List<Singer> selectBySize(int size);
+
+    List<Singer> selectByArea(String area);
 }

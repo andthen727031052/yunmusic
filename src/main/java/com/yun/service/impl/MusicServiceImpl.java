@@ -4,8 +4,11 @@ import com.yun.common.JsonBean;
 import com.yun.dao.MusicMapper;
 import com.yun.service.MusicService;
 import com.yun.util.JsonUtils;
+import com.yun.vo.MusicVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class MusicServiceImpl implements MusicService {
@@ -41,5 +44,16 @@ public class MusicServiceImpl implements MusicService {
     @Override
     public JsonBean findByUser(int uid) {
         return JsonUtils.createJsonBean(1,musicDao.selectBYUid(uid));
+    }
+
+    @Override
+    public JsonBean search(String name) {
+        List<MusicVo> list = musicDao.selectByMusicName(name);
+        if (list.size() != 0){
+            return JsonUtils.createJsonBean(1, list);
+        }else{
+            return JsonUtils.createJsonBean(0, "没有搜索到，换个关键字试试吧");
+        }
+
     }
 }

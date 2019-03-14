@@ -18,6 +18,11 @@ public class SingerController {
 
     @RequestMapping("/findbysize.do")
     public JsonBean findSingerBySize(int size){
-        return JsonUtils.createJsonBean(1, singerService.findSingerBySize(size));
+        return singerService.findSingerBySize(size);
+    }
+
+    @RequestMapping("/findbyarea.do")
+    public JsonBean findByArea(String area){
+        return singerService.findByArea(area);
     }
 }

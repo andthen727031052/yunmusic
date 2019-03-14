@@ -17,4 +17,9 @@ public class SingerServiceImpl implements SingerService {
     public JsonBean findSingerBySize(int size) {
         return JsonUtils.createJsonBean(1, singerDao.selectBySize(size));
     }
+
+    @Override
+    public JsonBean findByArea(String area) {
+        return JsonUtils.createJsonBean(1, singerDao.selectByArea(area));
+    }
 }

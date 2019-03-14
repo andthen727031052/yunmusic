@@ -169,4 +169,8 @@
 	on um.mid = m.id
     WHERE um.uid = #{uid}
   </select>
+  
+  <select id="selectByMusicName" parameterType="java.lang.String" resultType="com.yun.vo.MusicVo">
+    select id, name from t_music where name like "%"#{name}"%"
+  </select>
 </mapper>

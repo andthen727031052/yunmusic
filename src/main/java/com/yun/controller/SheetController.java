@@ -17,4 +17,9 @@ public class SheetController {
     public JsonBean randSheet(int count){
         return sheetService.randSearch(count);
     }
+
+    @RequestMapping("sheetone.do")
+    public JsonBean findSheetInfoByStid(int stid){
+        return sheetService.findSheetInfoById(stid);
+    }
 }

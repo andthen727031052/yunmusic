@@ -15,4 +15,9 @@ public class SheetServiceImpl implements SheetService {
     public JsonBean randSearch(int count) {
         return JsonUtils.createJsonBean(1,sheetDao.selectRandCount(count));
     }
+
+    @Override
+    public JsonBean findSheetInfoById(int stid) {
+        return JsonUtils.createJsonBean(1, sheetDao.selectById(stid));
+    }
 }

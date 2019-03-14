@@ -92,6 +92,10 @@
   </update>
 
   <select id="selectBySize" resultType="com.yun.entity.Singer">
-    select sname, sid from t_singer order by RAND() limit #{size}
+    select * from t_singer order by RAND() limit #{size}
+  </select>
+
+  <select id="selectByArea" resultType="com.yun.entity.Singer">
+    select * from t_singer where area=#{area}
   </select>
 </mapper>

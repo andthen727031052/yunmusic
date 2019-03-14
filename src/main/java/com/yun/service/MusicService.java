@@ -14,4 +14,6 @@ public interface MusicService {
     JsonBean findMusicBySheet(int id);
 
     JsonBean findByUser(int uid);
+
+    JsonBean search(String name);
 }

@@ -5,7 +5,7 @@ public class Singer {
 
     private String sname;
 
-    private Boolean gender;
+    private Integer gender;
 
     private String area;
 
@@ -27,11 +27,11 @@ public class Singer {
         this.sname = sname == null ? null : sname.trim();
     }
 
-    public Boolean getGender() {
+    public Integer getGender() {
         return gender;
     }
 
-    public void setGender(Boolean gender) {
+    public void setGender(Integer gender) {
         this.gender = gender;
     }
 

@@ -24,7 +24,7 @@ public class UserServiceImpl implements UserService {
                 String passwordT = user.getPassword();
                 if (passwordT.equals(password)){
                     session.setAttribute("user", user.getUid());
-                    return JsonUtils.createJsonBean(1, "登录成功");
+                    return JsonUtils.createJsonBean(1, user);
                 }else {
                     return JsonUtils.createJsonBean(0, "用户名或密码错误");
                 }
@@ -43,7 +43,7 @@ public class UserServiceImpl implements UserService {
                 if (user1 == null){
                     int num = userDao.insert(user);
                     if (num > 0){
-                        return JsonUtils.createJsonBean(0, "注册成功");
+                        return JsonUtils.createJsonBean(1, "注册成功");
                     }else {
                         return JsonUtils.createJsonBean(0, "注册失败");
                     }

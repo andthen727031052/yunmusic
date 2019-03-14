@@ -11,7 +11,7 @@ public interface SheetMapper {
 
     int insertSelective(Sheet record);
 
-    Sheet selectByPrimaryKey(Integer stid);
+    Sheet selectById(Integer stid);
 
     int updateByPrimaryKeySelective(Sheet record);
 

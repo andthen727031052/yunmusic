@@ -40,8 +40,13 @@ public class MusicController {
         return musicService.findHotMusicBySize(size);
     }
 
-    @RequestMapping("findmusicbyuid.do")
+    @RequestMapping("/findmusicbyuid.do")
     public JsonBean findMusicByUid(int uid){
         return musicService.findByUser(uid);
+    }
+
+    @RequestMapping("/search.do")
+    public JsonBean search(String name){
+        return musicService.search(name);
     }
 }

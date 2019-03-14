@@ -33,4 +33,7 @@ public interface MusicMapper {
     List<Music> selectHotMusic(int size);
     //根据用户id查询收藏的所有歌曲
     List<MusicVo> selectBYUid(int uid);
+
+    // 模糊查询歌曲，参数歌名
+    List<MusicVo> selectByMusicName(String name);
 }

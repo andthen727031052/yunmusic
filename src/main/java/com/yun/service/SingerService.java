@@ -5,4 +5,6 @@ import com.yun.common.JsonBean;
 public interface SingerService {
 
     JsonBean findSingerBySize(int size);
+
+    JsonBean findByArea(String area);
 }
